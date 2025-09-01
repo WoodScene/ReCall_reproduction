@@ -1,0 +1,16 @@
+{
+  "data_source": "musique_re_call",
+  "question": "When was the institute that owned The Collegian founded?",
+  "ability": "re_call",
+  "reward_model": {
+    "ground_truth": [
+      "1960"
+    ],
+    "style": "rule"
+  },
+  "extra_info": {
+    "env": "import requests\n\ndef wikipedia_search(query: str, top_n: int = 5):\n    url = \"<search-url-placeholder>/search\"\n    \n    if query == '':\n        return 'invalid query'\n    \n    data = {'query': query, 'top_n': top_n}\n    response = requests.post(url, json=data)\n    retrieval_text = ''\n    for line in response.json():\n        retrieval_text += f\"{line['contents']}\\n\\n\"\n    retrieval_text = retrieval_text.strip()\n    \n    return retrieval_text",
+    "func_schemas": "[\n    {\n        \"type\": \"function\",\n        \"function\": {\n            \"name\": \"wikipedia_search\",\n            \"description\": \"Search Wikipedia for a given query.\",\n            \"parameters\": {\n                \"type\": \"object\",\n                \"properties\": {\n                    \"query\": {\n                        \"type\": \"string\",\n                        \"description\": \"Query to search for.\"\n                    },\n                    \"top_n\": {\n                        \"type\": \"integer\",\n                        \"description\": \"Number of results to return. The default value is 5.\",\n                        \"default\": 5\n                    }\n                },\n                \"required\": [\n                    \"query\"\n                ]\n            }\n        }\n    }\n]",
+    "id": "train_0"
+  }
+}
